@@ -34,7 +34,7 @@ class Radio
         puts "#{e.class}: #{e.message}"
         print "Please provide another volume setting: "
         value = gets.chomp.to_i
-
+        
         @volume = value
     end
 
