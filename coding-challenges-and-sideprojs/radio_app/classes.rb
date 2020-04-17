@@ -29,11 +29,28 @@ class Radio
     end
 
     def volume=(value)
-        return if value < 1 || value > 10
+        raise OutofRangeError.new(value) if value < 1 || value > 10
+    rescue OutofRangeError => e
+        puts "#{e.class}: #{e.message}"
+        print "Please provide another volume setting: "
+        value = gets.chomp.to_i
+
         @volume = value
     end
 
     def status
         "station: #{@freq} #{@band}, volume: #{@volume}"
+    end
+end
+
+class OutofRangeError < StandardError
+
+    def initialize(value)
+        super
+        @value = value
+    end
+
+    def message
+        "Volume set was #{@value}. Please only set the volume from 1 to 10."
     end
 end

@@ -5,7 +5,7 @@ require_relative "classes.rb"
 fm = Radio.fm
 puts fm.status
 puts fm.band
-fm.volume = 9
+fm.volume = 11
 fm.freq = 90
 puts fm.status
 
