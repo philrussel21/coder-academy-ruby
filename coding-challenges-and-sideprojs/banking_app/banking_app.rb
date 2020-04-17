@@ -1,17 +1,29 @@
 # Write a program to implement a simple bank account. 
 
+$initial_balance
+
+
+def display_app
+	puts "Please choose from the options below:
+* Balance
+* Deposit
+* Withdraw
+* Exit"
+end
+
 def banking_app
 	# Your code here.
-	initial_balance = 0
+	$initial_balance = 0
 	user_password = "Password"
 	
-	# #prompt the user for their password
-	# puts "Please provide your password. Password is case sensitive."
-	# password = gets.chomp
-	# while password != user_password do
-	# 	puts "Wrong password. Please try again."
-	# 	password = gets.chomp
-	# end
+	#prompt the user for their password
+	puts "Please provide your password. Password is case sensitive."
+	password = gets.chomp
+	while password != user_password do
+		puts "Wrong password. Please try again or type q to quit."
+		password = gets.chomp
+		return if password == 'q'
+	end
 	
 	#welcoming message and selection
 	puts "Welcome to the banking app. 
@@ -21,11 +33,8 @@ Where you trust us with your money but we won't trust you with our pen!"
 	#loop for the app
 	app_running = true
 	while app_running do
-		puts "Please choose from the options below:
-	* balance
-	* deposit
-	* withdraw
-	* exit"
+		#display the functions and selection for the app.
+		display_app
 		customer_action = gets.chomp.downcase
 		puts customer_action
 
@@ -33,11 +42,8 @@ Where you trust us with your money but we won't trust you with our pen!"
 		#validation loop
 		while  !selection.include?(customer_action) do
 			puts "\e[H\e[2J"
-			puts "Invalid input. Please select an action from the below:
-	* balance
-	* deposit
-	* withdraw
-	* exit"
+			print "Invalid input. "
+			display_app
 			customer_action = gets.chomp.downcase
 		end
 
@@ -45,22 +51,22 @@ Where you trust us with your money but we won't trust you with our pen!"
 		if customer_action == 'deposit'
 			print "How much would you like to deposit? $"
 			deposit = gets.chomp.to_i
-			initial_balance += deposit
+			$initial_balance += deposit
 			#prints user balance
 			puts "\e[H\e[2J"
 			puts "You deposited $#{deposit}"
-			puts "Your Balance is $#{initial_balance}"
+			puts "Your Balance is $#{$initial_balance}"
 		elsif customer_action == 'withdraw'
 			print "How much would you like to withdraw? $"
 			withdraw = gets.chomp.to_i
-			if withdraw > initial_balance
+			if withdraw > $initial_balance
 				puts "\e[H\e[2J"
 				puts "The withdraw amount exceeds your account balance."
 			else
 				puts "\e[H\e[2J"
-				initial_balance -= withdraw
+				$initial_balance -= withdraw
 				puts "You have withdrawn $#{withdraw}"
-				puts "Your Balance is $#{initial_balance}"
+				puts "Your Balance is $#{$initial_balance}"
 			end
 			
 		elsif customer_action == 'exit'
@@ -68,7 +74,7 @@ Where you trust us with your money but we won't trust you with our pen!"
 			#abort("Thank you for using our app. See you next time!")
 		else
 			puts "\e[H\e[2J"
-			puts "Your Balance is $#{initial_balance}"
+			puts "Your Balance is $#{$initial_balance}"
 		end
 		
 	end
